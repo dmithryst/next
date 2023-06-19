@@ -3,17 +3,12 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 6rem;
+  padding: 2rem;
   height: 70vh;
 
   > :nth-child(2) {
     width: 90vw !important;
-    height: 600px;
-
-    > :first-child {
-      width: 90vw !important;
-      height: 600px;
-    }
+    height: 800px;
   }
 }
 

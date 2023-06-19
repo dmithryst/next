@@ -5,56 +5,74 @@ import { useEffect, useRef } from 'react';
 import s from 'app/Page.module.scss';
 
 let tvScriptLoadingPromise: undefined | Promise<unknown>;
+
 function createWidget() {
   if (document.getElementById('tradingview_75a46') && 'TradingView' in window) {
     // @ts-ignore
     new window.TradingView.widget({
       studies: [
-        'STD;Stochastic_RSI',
-        'STD;Average_True_Range',
-        'STD;MA%1Cross',
         {
           id: 'MASimple@tv-basicstudies',
           inputs: {
             length: 50,
-          },
-        },
-        {
-          id: 'MASimple@tv-basicstudies',
-          inputs: {
-            length: 20,
+            source: 'close',
+            offset: 0,
           },
         },
         {
           id: 'MASimple@tv-basicstudies',
           inputs: {
             length: 200,
+            source: 'close',
+            offset: 0,
           },
         },
+        {
+          id: 'MAExp@tv-basicstudies',
+          inputs: {
+            length: 20,
+            source: 'close',
+            offset: 0,
+          },
+        },
+        {
+          id: 'MAExp@tv-basicstudies',
+          inputs: {
+            length: 20,
+            source: 'close',
+            offset: 0,
+          },
+        },
+        {
+          id: 'MACD@tv-basicstudies',
+        },
+        {
+          id: 'ATR@tv-basicstudies',
+          inputs: {
+            length: 20,
+          },
+        },
+        {
+          id: 'Stochastic@tv-basicstudies',
+        },
       ],
-      autosize: true,
       symbol: 'BINANCE:BTCUSDT',
+      container_id: 'tradingview_75a46',
+      width: 980,
+      height: 610,
       interval: 'D',
       timezone: 'Etc/UTC',
-      theme: 'light',
-      style: '1',
+      theme: 'dark',
       locale: 'en',
       toolbar_bg: '#f1f3f6',
-      enable_publishing: true,
-      withdateranges: true,
-      hide_side_toolbar: false,
-      allow_symbol_change: true,
-      watchlist: ['BINANCE:BTCUSDT','BINANCE:BTCUSDC'],
-      details: true,
-      hotlist: true,
-      calendar: true,
-      show_popup_button: true,
-      popup_width: '1000',
-      popup_height: '650',
-      container_id: 'tradingview_75a46',
+      enable_publishing: false,
+      hide_top_toolbar: true,
+      hide_legend: true,
+      save_image: true,
     });
   }
 }
+
 export default function Home() {
   const onLoadScriptRef = useRef<null | Function>(null);
 
@@ -86,14 +104,9 @@ export default function Home() {
 
   return (
     <div className={s.main}>
-      <h1>Это некст, честное слово</h1>
+      <h1>Next.js</h1>
       <div className="tradingview-widget-container">
         <div id="tradingview_75a46" />
-        <div className="tradingview-widget-copyright">
-          <a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">
-            <span className="blue-text">Track all markets on TradingView</span>
-          </a>
-        </div>
       </div>
     </div>
   );
